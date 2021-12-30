@@ -16,10 +16,14 @@ void insert_node_cmd(pnode *head){
     new -> next = NULL;
     int i;
     //A4n02533n20411n13702
+
     //is there an edge?
     pedge first = (pedge)malloc(sizeof(pedge));
     pnode firstNode = (pnode)malloc(sizeof(pnode));
-
+    if(!first || !firstNode){
+            printf("error");
+            return;
+        }
     int nameOfFirst;
     scanf("%d",&nameOfFirst);
     firstNode->node_num=nameOfFirst;
@@ -40,7 +44,10 @@ void insert_node_cmd(pnode *head){
         //aren't we overrunning the same memory with malloc???
         //make new edge and add node as end point
         edge neighborEdge = (edge)malloc(sizeof(edge));
-
+        if(!neighborEdge){
+            printf("error");
+            return;
+        }
         //get its weight
         int neighborWeight;
         scanf("%d",&neighborWeight);
@@ -50,7 +57,7 @@ void insert_node_cmd(pnode *head){
 
         //lets add the edge to the end of the list
         edge *hold;
-        hold =  = *first;
+        pedge hold = *first;
         while(hold->next) { //while the next of copy is not null
             hold = hold->next;
         }
@@ -72,6 +79,7 @@ void insert_node_cmd(pnode *head){
     copy -> next= new; //add new node in the end of the list;
     return;
 }
+
 
 
 

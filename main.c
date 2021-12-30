@@ -1,40 +1,34 @@
 #include <stdio.h>
 #include "graph.h"
 
-#define TXT 1024
-
-void printGraph_cmd(pnode head){
-    if(!head){
-        prinf("No graph to print");
-        return;
-    }
-    pnode copy = head;
-    while(copy->next){
-        printf("Node ID: %d\n",copy->node_num);
-        pedge copyEdge = copy->edges;
-        while(copyEdge->next){
-            printf("Node edges: Edge endpoint: %d, Edge weight: %d",copy->edges->endpoint,copy->edges->weight);
-            copyEdge=copyEdge->next;
-        }
-        copy = copy->next;
-    }
-}
-
 
 int main(){
-
+    pnode n = NULL;
+    pnode *head = &n;
     char c;
-    pnode t = NULL;
-    pnode *head = &t;
-// to get the txt
-    scanf("%c",&c);
-    if(c=='A'){
-        build_graph_cmd(head);
+    while (scanf("%c", &c) != EOF)
+    {
+        if (c == 'A'){
+            build_graph_cmd(head);
+        }
+        else if (c == 'B'){
+            insert_node_cmd(head);
+        }
+        else if (c == 'D'){
+            delete_node_cmd(head);
+        }
+        else if (c == 'S'){
+            int src;
+            int dest;
+            scanf("%d, %d\n", &src, &dest);
+            int shortsPath = shortsPath_cmd(*head, src, dest);
+            printf("the shortest path is: %d \n", shortsPath);
+        }
+        else if (c == 'T'){
+            int tsp = TSP_cmd(*head);
+            printf("the TSP shortest path is: %d \n", tsp);
+        }
     }
-    
-    
-         
-
-
+    deleteGraph_cmd(head);
+    return 0;
 }
-
